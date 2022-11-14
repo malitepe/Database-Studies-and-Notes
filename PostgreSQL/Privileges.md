@@ -1,8 +1,7 @@
 ## User:
-PostgreSqQL'de user role ile birebir aynıdır. Sadece kullanım amaçları farklıdır. 
-`CREATE USER username;` ile oluşturulur. Aşağıdaki yetkilendirmeler ise default olarak gelir.
-`ALTER USER` ile güncellenebilir. `DROP USER` ile silinebilir.
-
+In PostgreSqQL, user and role are exactly the same. Only their intended use is different.
+`CREATE USER username;`  The following authorizations come by default.
+`ALTER USER` for update, `DROP USER` for delete.
 ```
 NOSUPERUSER
 INHERIT
@@ -11,7 +10,8 @@ NOCREATEROLE
 NOREPLICATION
 ```
 
-Önemli Not: user hakkında yaptığınız her değişikliği ve yazdığınız her kodu not alın. Çünkü verilen yetkiler ve user ile oluşturulmuş objeler yüzünden `DROP USER` kodu hata verir. Bu objelerin owner'ı değiştirilmeli ve yetkilendirmeleri ve yetkileri düşürülmelidir. `... cannot be dropped because some objects depend on it` hatası alır.
+Important Tip:
+Make a note of every change you make to the user and every code you write. Because the 'DROP USER' code may give an error due to the privileges given and the objects created with the user. The owner of these objects should be changed and their authorizations, and authorizations should be removed. You can face with `... cannot be dropped because some objects depend on it` error  .
 
 
 ## Role:
