@@ -15,27 +15,29 @@ Make a note of every change you make to the user and every code you write. Becau
 
 
 ## Role:
-Bu konsept daha anlaşılabilir ve kolay yönetilebilir bir sistem oluşması için tasarlanmıştır. `CREATE ROLE rolename` şeklinde oluşturulur. User'a ek olarak `NOLOGIN` default yetkisiyle oluşturulur. Fakat bunu `WITH LOGIN` eklentisi ile user gibi kullanabiliriz.
+The Role is designed to create a more understandable and easily manageable system. 
+`CREATE ROLE rolename` for create.
+Additionally `NOLOGIN` is default permission for role. But with `WITH LOGIN` , you can make it a user.
 
-Roller globaldir. Bir database'e göre oluşturulamazlar. Global oluşturup database erişimleri sağlanır.
+A role is global. you can not create it for a specific database. It is created globally and then given permissions specifically.
 
-Database sistemi ilk başlatıldığı zaman oluşturulan kullanıcı ismiyle(işletim sistemindeki kullanıcı) bir role oluşturulur. Çoğu zaman bu rol `postgres` rolüdür. Bu rol 'superuser' olarak tanımlanır. 
+A role is created with the username (user in the operating system) created when the database was first started. Most of the time this role is the `postgres` role. This role is defined as 'superuser'.
 
 ## Role Attributes:
 
-`CREATE ROLE name LOGIN;`
+`CREATE ROLE name WITH LOGIN;`
 `CREATE USER name;`
-Komutları aynı nesneyi oluşturur.
+This two commands create same object.
 
 
 ```
 CREATE ROLE app_user WITH
-  NOLOGIN -- giriş yapamaz
-  NOSUPERUSER --superuser değil
-  INHERIT -- atanan rollerin yetkilerini alamaz. 
-  NOCREATEDB -- db create edemez
-  NOCREATEROLE -- role create edemez.
-  NOREPLICATION; -- replica oluşturamaz.
+  NOLOGIN -- can not connect
+  NOSUPERUSER --not superuser
+  INHERIT -- can not inherit from granted roles
+  NOCREATEDB --  can not create db
+  NOCREATEROLE -- can not create role
+  NOREPLICATION; -- can not replica
 ```
 
 Not: CREATEDB ve CREATEROLE yetkisiyle, süper kullanıcı olmayan bir rol oluşturmak ve bu rolü veritabanlarının ve rollerin tüm rutin yönetimi için kullanmak iyi bir uygulamadır.Gerçekten gerektirmeyen görevler için bir süper kullanıcı olarak çalışmanın tehlikelerini önler.
