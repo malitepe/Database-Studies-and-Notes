@@ -75,7 +75,7 @@ CREATE ROLE postgres WITH
 
 
 
-##Priviliges:
+## Priviliges:
 
 SELECT
 table, view, materialized view 
