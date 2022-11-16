@@ -44,10 +44,11 @@ Not: CREATEDB ve CREATEROLE yetkisiyle, süper kullanıcı olmayan bir rol oluş
 
 ## Public:
 
-Yeni bir database oluşturulduğunda public adında bir shcema oluşturulur. Her yeni user veya role oluşturulduğunda default olarak public yetkileri verilir ve public schema'da object create yetkisi olur.
+When a new database is created, a schema named public is created. Every time a new user or role is created, public privileges are given by default and user or role is granted to create object privileges on the public schema.
 
 
-Aşağıdaki yetkilerle devam edilmesi önerilir.
+
+Best practice is shown below.
 ```
 revoke create on schema public from public;
 revoke all on database test1 from public;
@@ -56,9 +57,10 @@ revoke all on database test1 from public;
 
 
 ## Postgres:
-Postgres sistemin başlangıcında oluşturulan superuser'dır.
+Postgres is the superuser created at system startup.
 
 
+Create script
 ```
 CREATE ROLE postgres WITH
   LOGIN
@@ -76,15 +78,15 @@ CREATE ROLE postgres WITH
 ##Priviliges:
 
 SELECT
-tablo, view, materialized view gibi objelerden herhangi bir kolona veya spesifik bir kolona SELECT sorgusu atabilirsiniz.
+table, view, materialized view 
 
 INSERT
-yeni satır ekler .table, view, etc. 
+table, view, etc. add new records 
 
 UPDATE
 DELETE (require SELECT privilege)
 TRUNCATE
-REFERENCES(Foreign key constraint oluşturmak için gereklidir.)
+REFERENCES(is needed for create Foreign key constraint )
 TRIGGER
 CREATE
 Database için, yeni schema oluşturmak, trusted extensions indirmek için kullanılır.
